@@ -13,6 +13,7 @@ Skills load automatically when the context matches their `description`. No invoc
 | `env-example-sync-check` | Diff modifies env-var reads or the `.env` file. Ensures `.env.example` keeps the contract for first-run setup. |
 | `spec-status-update` | Implementation work tied to a `specs/specs_*.md` file is completed, in-progress, or de-scoped. Updates the Status line and milestone checkboxes. |
 | `update-architecture-md` | Diff adds or removes a service, package, layer, external integration, or major module. Keeps `docs/ARCHITECTURE.md` C4 diagrams current. |
+| `suggesting-adrs` | The conversation crosses into an architectural decision (comparing alternatives, switching providers, new external integration, cross-cutting pattern). Nudges the user to capture it via `/adr-new` before the rationale is lost. |
 
 ## Slash commands (user-invoked)
 
@@ -23,11 +24,11 @@ Run these explicitly. Replace `audiotrader-workflow` with the namespace your ins
 | Command | What it does |
 |---|---|
 | `/audiotrader-workflow:principal-review-correctness` | Reviews the branch diff for correctness, bugs, and unexpected behaviour. Includes the migration / shared-table audit insight. |
-| `/audiotrader-workflow:principal-review-guidelines` | Reviews the branch against `CODING_GUIDELINES.md` metrics (CC, MI, LCOM4) and the Clean Architecture dependency rule. |
+| `/audiotrader-workflow:principal-review-guidelines` | Reviews the branch against the metrics, thresholds, and dependency rule defined in `CODING_GUIDELINES.md`. Defers to the guidelines as source of truth (no parallel metric list). |
 | `/audiotrader-workflow:principal-review-tests` | Reviews the new tests against `CODING_GUIDELINES.md` testing standards (real DB, strong assertions, branch coverage, flakiness signals). |
 | `/audiotrader-workflow:principal-review-mutation` | Runs and interprets `mutmut` on the touched modules, applies the project mutation-score threshold, identifies real test gaps. |
 | `/audiotrader-workflow:principal-review-duplication` | Reviews the branch for code duplication against the whole codebase (exact, near, and conceptual duplicates). |
-| `/audiotrader-workflow:principal-review-organization` | Reviews module boundaries, layering, naming, and dependency-rule compliance. |
+| `/audiotrader-workflow:principal-review-organization` | Reviews module boundaries and asks whether the *current folder structure* still serves the codebase as it has grown. Complementary to the guidelines review. |
 
 ### Other reviews and authoring
 
@@ -54,7 +55,7 @@ A standard feature lifecycle, end to end:
    - `/principal-review-organization`
    - `/qa-feature-review`
    - `/run-ci-locally`
-5. **Auto-fired skills handle** observability scope, `.env.example` sync, ARCHITECTURE.md updates, spec status, and migration drift detection — you don't invoke them, they load when relevant.
+5. **Auto-fired skills handle** observability scope, `.env.example` sync, ARCHITECTURE.md updates, spec status, migration drift detection, and ADR-moment nudges — you don't invoke them, they load when relevant.
 6. **Open PR**, get review, merge, push.
 
 ## Notes

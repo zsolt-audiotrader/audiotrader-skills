@@ -8,8 +8,8 @@
     {
       "name": "audiotrader-workflow",
       "source": "./audiotrader-workflow",
-      "version": "0.1.0",
-      "description": "Audio Trader engineering workflow: pre-ship gates, multi-hat reviews, and Principal Engineer verification prompts for the Prism codebase."
+      "version": "0.3.0",
+      "description": "Audio Trader engineering workflow: 6 auto-trigger skills (pre-ship gates, ADR nudges, observability checks) and 10 user-invoked slash commands (Principal Engineer reviews, multi-hat spec review, ADR authoring) for the Prism codebase."
     }
   ]
 }
