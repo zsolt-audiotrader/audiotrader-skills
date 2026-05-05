@@ -21,6 +21,22 @@ Trigger on:
 
 ## Procedure
 
+### Determine the review scope
+
+```bash
+DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+DEFAULT=${DEFAULT:-main}
+CURRENT=$(git branch --show-current)
+```
+
+Choose `BASELINE`:
+
+- **`$CURRENT` ≠ `$DEFAULT`** (feature branch): `BASELINE=$DEFAULT`
+- **`$CURRENT` = `$DEFAULT`** with unpushed commits: `BASELINE=@{u}`
+- **Otherwise**: **stop and ask the user** what range to review.
+
+### Update the spec
+
 1. **Identify the active spec**. Either explicit from the user, or:
    ```bash
    ls -t specs/specs_*.md | head -5
@@ -32,8 +48,8 @@ Trigger on:
    - Milestone checkboxes (`- [ ]` / `- [x]`)
 3. **Compare to current branch reality**:
    ```bash
-   git log main..HEAD --oneline
-   git diff main...HEAD --stat
+   git log $BASELINE..HEAD --oneline
+   git diff $BASELINE...HEAD --stat
    ```
 4. **Update**:
    - Tick `[x]` on completed milestones

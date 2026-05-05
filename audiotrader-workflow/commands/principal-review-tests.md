@@ -4,10 +4,26 @@ description: Principal Engineer review of tests on the current branch against CO
 
 Act as a Principal Engineer reviewing the **tests** on the current feature branch against the testing standards in `packages/prism/CODING_GUIDELINES.md` (Test Quality Standards section).
 
+## Determine the review scope
+
+```bash
+DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+DEFAULT=${DEFAULT:-main}
+CURRENT=$(git branch --show-current)
+```
+
+Choose `BASELINE`:
+
+- **`$CURRENT` ≠ `$DEFAULT`** (feature branch): `BASELINE=$DEFAULT`
+- **`$CURRENT` = `$DEFAULT`** with unpushed commits: `BASELINE=@{u}`
+- **Otherwise**: **stop and ask the user** what range to review.
+
+## Review
+
 1. **Read the Test Quality Standards section** of `CODING_GUIDELINES.md`. Internalise the rules: mock HTTP, real DB; coverage targets; assertion strength; test isolation expectations.
 2. **List new and modified tests**:
    ```bash
-   git diff main...HEAD --name-only -- 'tests/' '**/test_*.py' '**/*_test.py'
+   git diff $BASELINE...HEAD --name-only -- 'tests/' '**/test_*.py' '**/*_test.py'
    ```
 3. **For each test, check**:
    - **Boundary**: Are HTTP calls mocked? Is the DB real (or an equivalent integration substrate)? Flag any test that mocks the DB inappropriately — these hide schema and migration drift.

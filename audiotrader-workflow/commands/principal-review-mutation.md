@@ -6,9 +6,25 @@ Act as a Principal Engineer ensuring **mutation testing** has been executed on t
 
 Read `packages/prism/CODING_GUIDELINES.md` section 5 ("Mutation Testing with mutmut") for the project's mutation testing workflow and result interpretation.
 
+## Determine the review scope
+
+```bash
+DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+DEFAULT=${DEFAULT:-main}
+CURRENT=$(git branch --show-current)
+```
+
+Choose `BASELINE`:
+
+- **`$CURRENT` ≠ `$DEFAULT`** (feature branch): `BASELINE=$DEFAULT`
+- **`$CURRENT` = `$DEFAULT`** with unpushed commits: `BASELINE=@{u}`
+- **Otherwise**: **stop and ask the user** what range to review.
+
+## Review
+
 1. **Identify the modules touched on this branch**:
    ```bash
-   git diff main...HEAD --name-only -- '*.py' | grep -v '^tests/' | sort -u
+   git diff $BASELINE...HEAD --name-only -- '*.py' | grep -v '^tests/' | sort -u
    ```
 2. **Run mutmut on each touched module** (from `packages/prism/`):
    ```bash

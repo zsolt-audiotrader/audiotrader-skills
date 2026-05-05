@@ -18,14 +18,30 @@ Run when:
 
 ## Procedure
 
+### Determine the review scope
+
+```bash
+DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+DEFAULT=${DEFAULT:-main}
+CURRENT=$(git branch --show-current)
+```
+
+Choose `BASELINE`:
+
+- **`$CURRENT` ≠ `$DEFAULT`** (feature branch): `BASELINE=$DEFAULT`
+- **`$CURRENT` = `$DEFAULT`** with unpushed commits: `BASELINE=@{u}`
+- **Otherwise**: **stop and ask the user** what range to review.
+
+### Run the check
+
 1. **Find all env vars referenced in code on this branch**:
    ```bash
-   git diff main...HEAD -- '*.py' | grep -oE '(os\.environ\[|os\.getenv\(|os\.environ\.get\()["\047][A-Z_][A-Z0-9_]+' \
+   git diff $BASELINE...HEAD -- '*.py' | grep -oE '(os\.environ\[|os\.getenv\(|os\.environ\.get\()["\047][A-Z_][A-Z0-9_]+' \
      | grep -oE '[A-Z_][A-Z0-9_]+' | sort -u
    ```
 2. **Find env vars declared in Settings classes** in the diff:
    ```bash
-   git diff main...HEAD -- '*settings*.py' '*config*.py' | grep -E '^\+\s+[a-z_]+:' | grep -oE '[a-z_]+:'
+   git diff $BASELINE...HEAD -- '*settings*.py' '*config*.py' | grep -E '^\+\s+[a-z_]+:' | grep -oE '[a-z_]+:'
    ```
    Translate snake_case → SCREAMING_SNAKE_CASE for env var names (Pydantic Settings convention).
 3. **Read the current `.env.example`**:

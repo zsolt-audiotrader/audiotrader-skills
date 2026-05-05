@@ -25,11 +25,27 @@ Skip for: bug fixes, internal refactors that preserve the L2 view, test-only cha
 
 ## Procedure
 
+### Determine the review scope
+
+```bash
+DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+DEFAULT=${DEFAULT:-main}
+CURRENT=$(git branch --show-current)
+```
+
+Choose `BASELINE`:
+
+- **`$CURRENT` ≠ `$DEFAULT`** (feature branch): `BASELINE=$DEFAULT`
+- **`$CURRENT` = `$DEFAULT`** with unpushed commits: `BASELINE=@{u}`
+- **Otherwise**: **stop and ask the user** what range to review.
+
+### Update the doc
+
 1. **Read `docs/ARCHITECTURE.md`**. Note the current L1 and L2 diagram contents and the prose around them.
 2. **Identify what the diff changes structurally**:
    ```bash
-   git diff main...HEAD --stat
-   git diff main...HEAD --name-only | grep -E '(pyproject|requirements|docker-compose|wrangler|terraform|packages/[^/]+/$)'
+   git diff $BASELINE...HEAD --stat
+   git diff $BASELINE...HEAD --name-only | grep -E '(pyproject|requirements|docker-compose|wrangler|terraform|packages/[^/]+/$)'
    ```
 3. **For each structural change, decide**:
    - **L1 (system context)** — does the new thing interact with an outside actor (user, 3rd-party service, partner system)? Update L1.

@@ -22,10 +22,26 @@ Skip for: pure-refactor diffs that change no behaviour, doc-only changes, test-o
 
 ## Procedure
 
+### Determine the review scope
+
+```bash
+DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+DEFAULT=${DEFAULT:-main}
+CURRENT=$(git branch --show-current)
+```
+
+Choose `BASELINE`:
+
+- **`$CURRENT` ≠ `$DEFAULT`** (feature branch): `BASELINE=$DEFAULT`
+- **`$CURRENT` = `$DEFAULT`** with unpushed commits: `BASELINE=@{u}`
+- **Otherwise**: **stop and ask the user** what range to review.
+
+### Run the check
+
 1. **Read the project logging conventions** in `packages/prism/CODING_GUIDELINES.md` (Logging section). Note required structured fields (`event`, `correlation_id`, `user_id` if applicable), log levels, and metric naming patterns.
 2. **Enumerate the new behaviours** in the diff:
    ```bash
-   git diff main...HEAD --name-only | xargs grep -l 'def \|async def \|@router\|@app\.' 2>/dev/null
+   git diff $BASELINE...HEAD --name-only | xargs grep -l 'def \|async def \|@router\|@app\.' 2>/dev/null
    ```
 3. **For each new behaviour, confirm**:
    - **Entry log** — `logger.info` with `event=` at the start of the operation

@@ -4,10 +4,26 @@ description: Principal QA Engineer review of features and capabilities on the cu
 
 Act as a Principal QA Engineer reviewing the **features and capabilities** delivered on the current feature branch. Focus on what could be missing in the testing — scenarios, paths, and edge cases that the developer's tests didn't cover.
 
+## Determine the review scope
+
+```bash
+DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+DEFAULT=${DEFAULT:-main}
+CURRENT=$(git branch --show-current)
+```
+
+Choose `BASELINE`:
+
+- **`$CURRENT` ≠ `$DEFAULT`** (feature branch): `BASELINE=$DEFAULT`
+- **`$CURRENT` = `$DEFAULT`** with unpushed commits: `BASELINE=@{u}`
+- **Otherwise**: **stop and ask the user** what range to review.
+
+## Review
+
 1. **Identify what's new behaviourally**:
    ```bash
-   git diff main...HEAD --stat
-   git log main..HEAD --oneline
+   git diff $BASELINE...HEAD --stat
+   git log $BASELINE..HEAD --oneline
    ```
    Read the corresponding spec in `specs/specs_*.md` if one exists.
 2. **For each new capability, enumerate scenarios** the user-facing behaviour should handle:
