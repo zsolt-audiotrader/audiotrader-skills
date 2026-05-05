@@ -1,0 +1,15 @@
+{
+  "name": "audiotrader-skills",
+  "owner": {
+    "name": "Audio Trader",
+    "url": "https://github.com/zsolt-audiotrader/audiotrader-skills"
+  },
+  "plugins": [
+    {
+      "name": "audiotrader-workflow",
+      "source": "./audiotrader-workflow",
+      "version": "0.1.0",
+      "description": "Audio Trader engineering workflow: pre-ship gates, multi-hat reviews, and Principal Engineer verification prompts for the Prism codebase."
+    }
+  ]
+}
