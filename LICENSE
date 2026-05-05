@@ -1,0 +1,24 @@
+Copyright (c) 2026 Audio Trader. All rights reserved.
+
+This repository is published for transparency and as documentation of Audio
+Trader's internal engineering workflow. It is NOT released under an open-source
+licence.
+
+Permitted:
+  - Reading the source for reference, learning, and evaluation.
+  - Audio Trader employees and authorised contractors may install and use the
+    plugin via the Claude Code marketplace mechanism for Audio Trader work.
+
+Not permitted without prior written permission from Audio Trader:
+  - Copying, vendoring, forking, or redistributing the source code or
+    documentation, in whole or in part, into any other repository or project.
+  - Modifying the source for use outside of Audio Trader.
+  - Republishing the contents on any other platform or marketplace.
+  - Using the contents to derive or train other software, models, or systems
+    intended for distribution.
+
+No warranty. The contents are provided "as is", without warranty of any kind,
+express or implied. Audio Trader accepts no liability for any use of, or
+reliance on, this material.
+
+For licensing inquiries, contact the repository owner via GitHub.

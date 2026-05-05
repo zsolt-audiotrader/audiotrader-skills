@@ -1,8 +1,8 @@
 # audiotrader-skills
 
-Audio Trader's internal Claude Code marketplace. Bundles the engineering workflow as installable skills and slash commands, so every dev gets the same pre-ship gates and review prompts on every project.
+Audio Trader's Claude Code marketplace. Bundles the engineering workflow as installable skills and slash commands, so every dev gets the same pre-ship gates and review prompts on every project.
 
-This is a **private** repo. Access is gated by GitHub team membership — `/plugin install` uses your local git credentials (gh CLI / SSH agent), so non-org members get a clone failure.
+This repo is **public for read access** but **not licensed for reuse** — see [LICENSE](LICENSE). The contents reference Audio Trader internal conventions (`CODING_GUIDELINES.md`, the Prism codebase layout, our spec format) and aren't intended to be copied into other projects without permission.
 
 ## What's inside
 
@@ -61,4 +61,8 @@ audiotrader-skills/
 
 ## Why a plugin marketplace and not a shared `.claude/skills/` directory?
 
-Single source of truth, namespaced installation, automatic updates on commit, private-repo access control via GitHub. Submodules and symlinks were considered and rejected — see the original design discussion if curious.
+Single source of truth, namespaced installation, automatic updates on commit. Submodules and symlinks were considered and rejected — see the original design discussion if curious.
+
+## License
+
+See [LICENSE](LICENSE). All rights reserved by Audio Trader. The source is published for transparency and as documentation; no licence is granted to copy, modify, distribute, or reuse the contents in any other project. Contact the repo owner for licensing inquiries.
