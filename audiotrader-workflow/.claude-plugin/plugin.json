@@ -1,6 +1,6 @@
 {
   "name": "audiotrader-workflow",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Audio Trader engineering workflow: pre-ship gates, multi-hat reviews, and Principal Engineer verification prompts.",
   "author": {
     "name": "Audio Trader Engineering"
