@@ -36,6 +36,9 @@ Stress-test domain relationships with specific scenarios. Invent edge cases that
 ### Cross-reference with code
 When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your reconciler emits one event per orphan, but you just said partial-batch handling is supported — which is right?"
 
+### Name the failure case before endorsing
+Before agreeing with any part of the user's plan, state the strongest reasons it could fail — the real ones, not hedged ones. Only then indicate agreement, and explain why those reasons don't dominate. Endorsement that skips this step is just agreement wearing a costume.
+
 ### Update CONTEXT.md inline
 When a term is resolved, update `<project-root>/CONTEXT.md` right there. Don't batch. Use the format in [`../references/context-md-format.md`](../references/context-md-format.md).
 

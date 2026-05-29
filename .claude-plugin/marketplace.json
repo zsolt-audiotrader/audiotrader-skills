@@ -8,7 +8,7 @@
     {
       "name": "audiotrader-workflow",
       "source": "./audiotrader-workflow",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "description": "Audio Trader engineering workflow: 7 auto-trigger skills (pre-ship gates, ADR + grilling nudges, observability checks) and 13 user-invoked slash commands (Principal Engineer reviews, multi-hat spec review, ADR authoring, design grilling, architecture deepening hunts, bug diagnosis) for the Audio Trader codebases."
     }
   ]
