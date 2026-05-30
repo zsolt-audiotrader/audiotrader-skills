@@ -44,6 +44,41 @@ Plugins auto-update when you re-run `/plugin install` or `/plugin update`. We bu
 4. Bump `audiotrader-workflow/.claude-plugin/plugin.json` `version` for material changes.
 5. Open a PR. Merge via squash.
 
+## Status line
+
+`statusline-command.sh` is a Claude Code [status line](https://docs.claude.com/en/docs/claude-code/statusline) script, tracked here so the team can share one consistent prompt.
+
+**Purpose** — renders a compact, colour-coded status line at the bottom of the Claude Code TUI, so you can see at a glance which model you're on, where you are in git, how much context you've burned, and what the session has cost.
+
+**Output** — reads the session JSON from stdin and prints a single line:
+
+```
+[Opus 4.8] audiotrader-skills | git:  main* ↑2 | ▰▰▰▱▱▱▱▱▱▱ 28% | $0.42 | 3m 12s
+```
+
+- **`[model]`** — the active model's display name (green).
+- **`folder`** — the current working directory's basename (blue).
+- **`git: branch`** — current branch (magenta), with `*` if the working tree is dirty (yellow), `↑N` commits ahead (green) and `↓N` commits behind upstream (red). Omitted outside a git repo.
+- **context bar** — a 10-segment `▰▱` bar plus the percentage of the context window used; the percentage turns yellow at ≥70% and red at ≥90%.
+- **`$cost`** — total session cost in USD (yellow).
+- **duration** — wall-clock session time as `Xm Ys` (dim cyan).
+
+Requires `jq` and `git` on `PATH`.
+
+**Installation** — point your Claude Code settings at the script:
+
+```json
+// ~/.claude/settings.json (or a project .claude/settings.json)
+{
+  "statusLine": {
+    "type": "command",
+    "command": "/absolute/path/to/audiotrader-skills/statusline-command.sh"
+  }
+}
+```
+
+Make sure it's executable (`chmod +x statusline-command.sh`), then start a new Claude Code session. The status line is per-user config — it is **not** distributed by the plugin install, so each dev wires it up once.
+
 ## Layout
 
 ```
@@ -51,6 +86,7 @@ audiotrader-skills/
 ├── .claude-plugin/
 │   └── marketplace.json              # marketplace manifest
 ├── README.md                          # this file
+├── statusline-command.sh              # shared Claude Code status line
 └── audiotrader-workflow/              # the plugin
     ├── .claude-plugin/
     │   └── plugin.json                # plugin manifest + version
