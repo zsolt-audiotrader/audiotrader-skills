@@ -8,8 +8,8 @@ This repo is **public for read access** but **not licensed for reuse** — see [
 
 A single plugin, **`audiotrader-workflow`**, containing:
 
-- **5 auto-trigger skills** that fire when context matches (e.g. before claiming a feature is done, when an Alembic migration changes a shared table)
-- **10 user-invoked slash commands** for verification reviews (Principal Engineer / QA review prompts, multi-hat spec review, ADR authoring, local CI run)
+- **7 auto-trigger skills** that fire when context matches (e.g. before claiming a feature is done, when an Alembic migration changes a shared table)
+- **13 user-invoked slash commands** for verification reviews (Principal Engineer / QA review prompts, multi-hat spec review, ADR authoring, architecture deepening, diagnosis, local CI run)
 
 See `audiotrader-workflow/README.md` for the full inventory and per-item details.
 
@@ -86,13 +86,16 @@ audiotrader-skills/
 ├── .claude-plugin/
 │   └── marketplace.json              # marketplace manifest
 ├── README.md                          # this file
+├── LICENSE                            # all rights reserved
+├── NOTICES.md                         # third-party attribution
 ├── statusline-command.sh              # shared Claude Code status line
 └── audiotrader-workflow/              # the plugin
     ├── .claude-plugin/
     │   └── plugin.json                # plugin manifest + version
     ├── README.md                      # full inventory
     ├── skills/<name>/SKILL.md         # auto-trigger skills
-    └── commands/<name>.md             # user-invoked slash commands
+    ├── commands/<name>.md             # user-invoked slash commands
+    └── references/<name>.md           # shared reference docs for skills/commands
 ```
 
 ## Why a plugin marketplace and not a shared `.claude/skills/` directory?
