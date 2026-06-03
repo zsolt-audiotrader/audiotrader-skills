@@ -45,13 +45,14 @@ When a term is resolved, update `<project-root>/CONTEXT.md` right there. Don't b
 `CONTEXT.md` is a glossary — **totally devoid of implementation details**. Do not treat it as a spec, a scratch pad, or a repository for implementation decisions.
 
 ### Route ADR-worthy decisions to /adr-new
-Only flag an ADR when all three are true:
+Only flag an ADR when all four are true:
 
 1. **Hard to reverse** — cost of changing your mind later is meaningful
 2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
 3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
+4. **Structural, not a domain rule** — the decision is about the *shape of the system* (a component, integration, cross-cutting pattern, store, or topology), not a *business/domain rule*. Domain rules are hard-to-reverse, surprising, and full of trade-offs too — but they belong in the spec, not an ADR. Ask: "is this about *how the system is built*, or *what the business does*?"
 
-If any of the three is missing, skip the ADR. When all three hold, suggest:
+If any of the four is missing, skip the ADR. A domain-rule resolution goes to the spec being grilled (and its **term**, if newly coined, to `CONTEXT.md`) — not to an ADR. When all four hold, suggest:
 
 > `/audiotrader-workflow:adr-new "<short imperative title>"`
 
