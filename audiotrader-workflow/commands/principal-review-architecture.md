@@ -69,3 +69,9 @@ Transient review output — write nothing to disk.
 - **Section 2 — Schema review**: the Mermaid `erDiagram` block, the field summary table(s), and any smell-checklist failures. End with: *"Want the ERD written to a scratch file or rendered as an artifact so you can view it properly?"* — a fenced mermaid block in a terminal is not a diagram.
 - If the review found drift against `docs/ARCHITECTURE.md`, recommend running the `update-architecture-md` skill.
 - If the branch is clean, say so explicitly — do not invent issues.
+
+**Delivery:** the report is the deliverable — it must be the FINAL text of the
+turn, with no fix/commit tool calls after it. Applying fixes, or invoking the
+next review in a chain, happens in the next turn, after the user has seen the
+report. Mid-turn text between tool calls may never render; a buried report is
+an unread report.

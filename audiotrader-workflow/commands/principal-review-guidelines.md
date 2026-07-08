@@ -40,3 +40,9 @@ Three sections:
 - **Exceptions applied** — where you knowingly accepted a value outside the threshold, with cite to the exception clause that allows it
 
 Be specific. "Function `foo` has CC=14 (CODING_GUIDELINES section 1 threshold: 10)" beats "complexity is high".
+
+**Delivery:** the report is the deliverable — it must be the FINAL text of the
+turn, with no fix/commit tool calls after it. Applying fixes, or invoking the
+next review in a chain, happens in the next turn, after the user has seen the
+report. Mid-turn text between tool calls may never render; a buried report is
+an unread report.

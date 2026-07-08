@@ -57,6 +57,17 @@ Suggested order before shipping:
 
 If the user accepts, run the commands in order, fixing findings between steps. If the user dismisses, ship without further comment and do not raise it again for this work.
 
+**Report delivery is part of each review, not optional narration.** When the
+reviews are chained in one session (rather than the user invoking each slash
+command), every review's full report MUST land where the user actually reads:
+**end the turn with the complete report before applying any fixes** — the user
+reads it, then the fixes happen in the next turn. Text emitted between tool
+calls may never be rendered; a report followed in the same turn by forty
+fix/commit tool calls is a report the user never saw (this happened on the
+inbound-parity branch, 2026-07-08). If the user explicitly asks for the whole
+trinity non-stop, the final message of the run must restate all three reports
+in full — a one-line "review clean, fixes applied" summary does not count.
+
 ## Red flags
 
 - **Suggesting a subset or substitute of the trinity.** Correctness + QA is not the trinity. The set and order are fixed; the size gate is the only sanctioned reduction.
@@ -65,3 +76,5 @@ If the user accepts, run the commands in order, fixing findings between steps. I
 - **Reviewing inline instead of nudging.** Scope is *suggestion only*; the slash commands do the reviewing.
 - **Re-firing after dismissal.** One nudge per shippable unit of work.
 - **Blocking the ship.** This is advisory. If the user says push, push.
+- **Burying a review report mid-turn.** Fix-work tool calls after the report in
+  the same turn push it out of sight. Report first, end the turn, fix next turn.

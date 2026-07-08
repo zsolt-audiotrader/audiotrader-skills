@@ -41,3 +41,9 @@ Two sections:
 - **Code correctness** — findings grouped by severity (Critical / High / Medium / Low). For each: file:line, the issue, and the concrete fix.
 
 If the branch is clean, say so explicitly — do not invent issues.
+
+**Delivery:** the report is the deliverable — it must be the FINAL text of the
+turn, with no fix/commit tool calls after it. Applying fixes, or invoking the
+next review in a chain, happens in the next turn, after the user has seen the
+report. Mid-turn text between tool calls may never render; a buried report is
+an unread report.
