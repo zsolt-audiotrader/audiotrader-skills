@@ -8,8 +8,8 @@ This repo is **public for read access** but **not licensed for reuse** — see [
 
 A single plugin, **`audiotrader-workflow`**, containing:
 
-- **7 auto-trigger skills** that fire when context matches (e.g. before claiming a feature is done, when an Alembic migration changes a shared table)
-- **13 user-invoked slash commands** for verification reviews (Principal Engineer / QA review prompts, multi-hat spec review, ADR authoring, architecture deepening, diagnosis, local CI run)
+- **8 auto-trigger skills** that fire when context matches (e.g. before claiming a feature is done, when an Alembic migration changes a shared table)
+- **14 user-invoked slash commands** for verification reviews (Principal Engineer / QA review prompts, multi-hat spec review, ADR authoring, architecture deepening, diagnosis, local CI run)
 
 See `audiotrader-workflow/README.md` for the full inventory and per-item details.
 

@@ -15,6 +15,7 @@ Skills load automatically when the context matches their `description`. No invoc
 | `update-architecture-md` | Diff adds or removes a service, package, layer, external integration, or major module. Keeps `docs/ARCHITECTURE.md` C4 diagrams current. |
 | `suggesting-adrs` | The conversation crosses into an architectural decision (comparing alternatives, switching providers, new external integration, cross-cutting pattern). Nudges the user to capture it via `/adr-new` before the rationale is lost. |
 | `suggesting-grilling` | A plan, spec, or design is about to be committed to without being stress-tested — pre-implementation, pre-plan-writing, brainstorming just finished, terminology drift against `CONTEXT.md`, or cross-context boundary work. Nudges the user to run `/grill` before momentum carries past. |
+| `suggesting-principal-reviews` | Work is wrapping up and about to ship — a PR is about to be created, or accumulated work on `main` is about to be pushed. Nudges the user to run the review trinity (correctness → architecture → guidelines) in order; gates down to correctness-only for small diffs. |
 
 ## Slash commands (user-invoked)
 
@@ -25,6 +26,7 @@ Run these explicitly. Replace `audiotrader-workflow` with the namespace your ins
 | Command | What it does |
 |---|---|
 | `/audiotrader-workflow:principal-review-correctness` | Reviews the branch diff for correctness, bugs, and unexpected behaviour. Includes the migration / shared-table audit insight. |
+| `/audiotrader-workflow:principal-review-architecture` | Reviews the branch for architecture conformance: ADR/pattern/boundary violations (evidence rule: no citation, no finding) plus a database schema review — one-hop Mermaid ERD rendered from the ORM models showing how new tables graft onto the existing schema, field-purpose summary, and schema smell checklist. |
 | `/audiotrader-workflow:principal-review-guidelines` | Reviews the branch against the metrics, thresholds, and dependency rule defined in `CODING_GUIDELINES.md`. Defers to the guidelines as source of truth (no parallel metric list). |
 | `/audiotrader-workflow:principal-review-tests` | Reviews the new tests against `CODING_GUIDELINES.md` testing standards (real DB, strong assertions, branch coverage, flakiness signals). |
 | `/audiotrader-workflow:principal-review-mutation` | Runs and interprets `mutmut` on the touched modules, applies the project mutation-score threshold, identifies real test gaps. |
@@ -50,8 +52,9 @@ A standard feature lifecycle, end to end:
 1. **Spec** — write the spec; run `/multi-hat-spec-review specs/specs_<date>_<name>.md` for stakeholder pressure-testing.
 2. **Decide** — for architectural decisions, run `/adr-new "<decision title>"`.
 3. **Implement** — code + tests with TDD (`superpowers:test-driven-development`).
-4. **Pre-PR sweep**:
+4. **Pre-PR sweep** (the `suggesting-principal-reviews` skill nudges the first three, in this order, at wrap-up):
    - `/principal-review-correctness`
+   - `/principal-review-architecture`
    - `/principal-review-guidelines`
    - `/principal-review-tests`
    - `/principal-review-mutation`
@@ -59,7 +62,7 @@ A standard feature lifecycle, end to end:
    - `/principal-review-organization`
    - `/qa-feature-review`
    - `/run-ci-locally`
-5. **Auto-fired skills handle** observability scope, `.env.example` sync, ARCHITECTURE.md updates, spec status, migration drift detection, ADR-moment nudges, and grilling-moment nudges — you don't invoke them, they load when relevant.
+5. **Auto-fired skills handle** observability scope, `.env.example` sync, ARCHITECTURE.md updates, spec status, migration drift detection, ADR-moment nudges, grilling-moment nudges, and the pre-ship trinity nudge — you don't invoke them, they load when relevant.
 6. **Open PR**, get review, merge, push.
 
 ## Notes
