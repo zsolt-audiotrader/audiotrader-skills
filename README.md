@@ -9,7 +9,7 @@ This repo is **public for read access** but **not licensed for reuse** — see [
 A single plugin, **`audiotrader-workflow`**, containing:
 
 - **8 auto-trigger skills** that fire when context matches (e.g. before claiming a feature is done, when an Alembic migration changes a shared table)
-- **14 user-invoked slash commands** for verification reviews (Principal Engineer / QA review prompts, multi-hat spec review, ADR authoring, architecture deepening, diagnosis, local CI run)
+- **15 user-invoked slash commands** for verification reviews (Principal Engineer / QA review prompts, multi-hat spec review, ADR authoring, architecture deepening, diagnosis, local CI run, STE re-explanation)
 
 See `audiotrader-workflow/README.md` for the full inventory and per-item details.
 
@@ -86,6 +86,7 @@ audiotrader-skills/
 ├── .claude-plugin/
 │   └── marketplace.json              # marketplace manifest
 ├── README.md                          # this file
+├── docs/superpowers/specs/            # design specs for this repo's own features
 ├── LICENSE                            # all rights reserved
 ├── NOTICES.md                         # third-party attribution
 ├── statusline-command.sh              # shared Claude Code status line

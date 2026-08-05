@@ -44,6 +44,7 @@ Run these explicitly. Replace `audiotrader-workflow` with the namespace your ins
 | `/audiotrader-workflow:diagnose [<bug or failing-test path>]` | Disciplined feedback-loop construction and instrumentation for hard bugs. 10-item feedback-loop menu, ranked falsifiable hypotheses, tagged debug logs, seam-aware regression testing, post-mortem that routes architectural findings to `/architecture-deepening`. Assumes `superpowers:systematic-debugging` is the auto-fire layer; use this when the bug needs the deeper technique. |
 | `/audiotrader-workflow:adr-new <title>` | Authors a new ADR following `docs/adr/adr.template.md` and the project naming convention. |
 | `/audiotrader-workflow:run-ci-locally` | Runs every step of the GitHub Actions CI pipeline locally, fixes failures, doesn't sample. |
+| `/audiotrader-workflow:wait-what [<term, file, or concept>]` | Re-explains the previous response (or the named term/file/concept) in ASD-STE100-inspired Simplified Technical English: short sentences, active voice, one idea per sentence, `CONTEXT.md` glossary terms as the approved vocabulary, missing premises stated and flagged. For the moment an explanation loses you. |
 
 ## Suggested workflow
 
