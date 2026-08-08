@@ -15,11 +15,13 @@ The user is confused. Re-explain, in Simplified Technical English, following eve
 Your explanation must follow all of these:
 
 1. Sentences of 20 words or fewer. Up to 25 for purely descriptive sentences.
-2. Active voice. Present tense where possible.
-3. One instruction or one idea per sentence.
-4. One word, one meaning. Call the same thing by the same name every time. No synonym variation.
-5. Prefer lists and numbered steps over paragraphs.
-6. No idioms, no metaphors, no filler phrases.
+2. Never use a long word where a short one carries the same meaning.
+3. Active voice. Present tense where possible.
+4. One instruction or one idea per sentence.
+5. One word, one meaning. Call the same thing by the same name every time. No synonym variation.
+6. Match the shape to the content. Use a numbered list only for an ordered sequence of steps. Use a bullet list only for a genuine set of parallel items. For everything else — describing what a thing is, why it works, or how one fact leads to another — write short-sentence paragraphs. Do not force a list when the content is not a sequence or a set.
+7. No idioms, no metaphors, no filler phrases.
+8. If following these rules would make a sentence awkward or unclear, break the rule. Clarity for the reader wins over literal compliance.
 
 ## Technical Names
 

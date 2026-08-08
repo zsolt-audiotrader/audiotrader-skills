@@ -22,11 +22,13 @@ Strictness: STE **writing rules** only, not the STE controlled dictionary (the ~
 
 2. **STE writing rules** (the output must follow all of these)
    - Sentences of 20 words or fewer; up to 25 for descriptive text.
+   - Never use a long word where a short one carries the same meaning.
    - Active voice; present tense where possible.
    - One instruction or one idea per sentence.
    - One word, one meaning — the same thing is always called by the same name; no synonym variation.
-   - Prefer lists and numbered steps over paragraphs.
+   - Match shape to content: numbered lists for ordered steps, bullet lists for genuine parallel sets, short-sentence paragraphs for everything descriptive. Never force a list when the content is neither a sequence nor a set.
    - No idioms, no metaphors, no filler.
+   - Escape hatch: if following these rules would make a sentence awkward or unclear, break the rule — clarity for the reader wins over literal compliance.
 
 3. **Technical Names**
    - If the project root has `CONTEXT.md`, read it. Its glossary terms are the approved technical vocabulary, used with exactly their glossary meaning.
