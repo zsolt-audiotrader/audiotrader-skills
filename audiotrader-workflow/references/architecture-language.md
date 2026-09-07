@@ -45,10 +45,17 @@ What callers get from Depth — more capability per unit of Interface they have 
 **Locality**
 What maintainers get from Depth — change, bugs, knowledge, and verification concentrate at one place rather than spreading across callers. Fix once, fixed everywhere.
 
+**Envelope**
+The range of conditions production actually operates in: scale (orders, listings, events per day, as orders of magnitude), tenancy, live versus planned integrations, operators, team size, deploy shape, uptime expectation. Architecture is judged against the Envelope, not against what the code could handle.
+_Avoid_: "requirements" (aspirational), "load" (too narrow), "non-functionals" (jargon).
+
+> **In Prism:** one business, one deploy, a handful of operators, a fixed set of live channels. Established per session by `/audiotrader-workflow:architecture-simplification` from docs plus user confirmation; not written to disk.
+
 ## Principles
 
 - **Depth is a property of the Interface, not the Implementation.** A deep Module can be internally composed of small, mockable, swappable parts — they just aren't part of the Interface. A Module can have **internal Seams** (private to its Implementation, used by its own tests) as well as the **external Seam** at its Interface.
-- **The deletion test.** Imagine deleting the Module. If complexity vanishes, the Module wasn't hiding anything (it was a pass-through). If complexity reappears across N callers, the Module was earning its keep.
+- **The deletion test.** Imagine deleting the Module. If complexity vanishes, the Module wasn't hiding anything (it was a pass-through). If complexity reappears across N callers, the Module was earning its keep. Each verdict routes to a hunt: complexity reappears → `/audiotrader-workflow:architecture-deepening`; complexity vanishes → `/audiotrader-workflow:architecture-simplification`.
+- **The fit test.** Ask what production exercises through this Interface, then what the Implementation handles that production never presents. The excess is a simplification candidate — if the deletion test agrees that removing it makes complexity vanish rather than reappear.
 - **The Interface is the test surface.** Callers and tests cross the same Seam. If you want to test *past* the Interface, the Module is probably the wrong shape.
 - **Don't introduce a new Seam just to feel testable.** Recognise the Seams that already exist via constructor injection and ABC subclassing — they count. But also don't add Ports/Protocols speculatively. If only one Adapter ever exists and the Seam isn't used for anything, it's just indirection.
 
@@ -79,6 +86,7 @@ If a candidate proposes to name a deepened Module after a concept *not* in `CONT
 - A **Seam** is where a **Module**'s **Interface** lives.
 - An **Adapter** sits at a **Seam** and satisfies the **Interface**.
 - **Depth** produces **Leverage** for callers and **Locality** for maintainers.
+- The **Envelope** bounds which behaviour a **Module**'s **Depth** is measured against.
 
 ---
 

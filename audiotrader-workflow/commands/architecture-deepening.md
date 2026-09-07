@@ -86,6 +86,7 @@ Skip the offer for ephemeral reasons ("not worth it right now") or self-evident 
 
 - **Not branch-scoped.** This command surveys the codebase at HEAD. For branch-scoped structural review (placement of new code, folder strain), use `/audiotrader-workflow:principal-review-organization` — they're complementary.
 - **Not the structural rule check.** `/audiotrader-workflow:principal-review-guidelines` verifies `CODING_GUIDELINES.md` compliance (Dependency Rule, naming rules). This is different — it asks whether the *shape* is right, not whether the *rules* are followed.
+- **Not the simplification hunt.** When the deletion test says complexity *vanishes*, that is `/audiotrader-workflow:architecture-simplification`'s candidate, not ours. This command concentrates complexity that has to exist; that one removes complexity that doesn't.
 - **Not implementation.** This command proposes refactors and hands off to grilling. It does not modify code. If the user accepts a deepening, the implementation is a separate session.
 
 ## Output

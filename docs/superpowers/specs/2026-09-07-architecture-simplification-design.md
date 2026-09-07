@@ -1,7 +1,7 @@
 # /architecture-simplification — over-building hunt
 
 **Date**: 2026-09-07
-**Status**: Proposed
+**Status**: Approved
 **Artifact**: `audiotrader-workflow/commands/architecture-simplification.md`
 
 ## Problem

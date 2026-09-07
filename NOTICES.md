@@ -21,6 +21,9 @@ upstream sources are also included in the footer of each adapted file.
   — adapted from `skills/engineering/grill-with-docs/CONTEXT-FORMAT.md`
 - `audiotrader-workflow/commands/architecture-deepening.md`
   — adapted from `skills/engineering/improve-codebase-architecture/SKILL.md`
+- `audiotrader-workflow/commands/architecture-simplification.md`
+  — process structure adapted via `architecture-deepening.md` from
+  `skills/engineering/improve-codebase-architecture/SKILL.md`
 - `audiotrader-workflow/references/architecture-language.md`
   — adapted from `skills/engineering/improve-codebase-architecture/LANGUAGE.md`
 - `audiotrader-workflow/references/deepening-techniques-python.md`
