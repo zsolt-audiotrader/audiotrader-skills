@@ -37,7 +37,7 @@ Apply the **deletion test** to anything you suspect is shallow: would deleting i
 
 For Python codebases, see [`../references/deepening-techniques-python.md`](../references/deepening-techniques-python.md) for stack-specific patterns: Protocol vs ABC, async-as-Seam, in-memory SQLite vs testcontainers, constructor-injected DI as a Seam.
 
-**Use CodeGraphContext** (`mcp__cgc__execute_cypher_query`, `mcp__cgc__analyze_code_relationships`) for impact analysis if available. Mechanical signals from CGC:
+**Use codebase-memory** (`mcp__codebase-memory__query_graph`, `mcp__codebase-memory__trace_path`) for impact analysis if available. It does not link calls made through an object (`self._x.method()`), so confirm caller counts with grep. Mechanical signals:
 
 - Modules with high incoming-import count + complex Interface = strong deepening candidates
 - Tight bidirectional clusters = a `package/` waiting to emerge

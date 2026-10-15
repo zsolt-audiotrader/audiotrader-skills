@@ -28,7 +28,7 @@ Choose `BASELINE`:
    # File counts and sizes per directory:
    find packages/prism/app -type d -maxdepth 2 -exec sh -c 'echo "$0: $(find "$0" -maxdepth 1 -name "*.py" | wc -l) files, $(find "$0" -maxdepth 1 -name "*.py" -exec cat {} + | wc -l) lines"' {} \;
    ```
-   Note the top-level packages, the depth of the hierarchy, file-count per directory, and which packages have grown notably. Use the **CodeGraphContext MCP** (`execute_cypher_query`, `analyze_code_relationships`) for impact and import-graph analysis.
+   Note the top-level packages, the depth of the hierarchy, file-count per directory, and which packages have grown notably. Use the **codebase-memory MCP** (`query_graph`, `trace_path`, `get_architecture`) for impact and import-graph analysis. Imports run from a file to the symbol it imports, so incoming imports per file are `MATCH (a:File)-[:IMPORTS]->(s) RETURN s.file_path, count(DISTINCT a.file_path) AS importers ORDER BY importers DESC`.
 
 2. **Place the new code** (from `git diff $BASELINE...HEAD --name-only -- '*.py'`):
    - For each new function, class, or module, ask: is it in the right module? A `payments` concern in a `users` module is a smell. A generic `helpers.py` accumulating unrelated functions is a god-module forming.
@@ -46,7 +46,7 @@ Choose `BASELINE`:
    - Repeated cross-module imports — A imports from B and B imports from A is a smell
    - Names like `Foo*Service`, `Foo*Repository`, `Foo*Schema` clustered together — likely a `foo/` package waiting to happen
    - A growing `core/` or `shared/` becoming a junk drawer
-   - Use CGC to find import-graph cliques: which modules form tight bidirectional clusters?
+   - Use codebase-memory (`query_graph` on `IMPORTS` edges) to find import-graph cliques: which modules form tight bidirectional clusters?
 
 5. **Resist restructuring for symmetry**. Propose changes only when the *current* structure costs something concrete: harder navigation, repeated mistakes, painful imports, frequent merge conflicts, or onboarding friction.
 

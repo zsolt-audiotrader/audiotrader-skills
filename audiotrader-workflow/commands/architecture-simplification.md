@@ -42,14 +42,14 @@ Present the statement and ask the user to correct it. One message, then wait. If
 
 ### 2. Explore for over-building
 
-Walk the codebase organically. Apply the fit test to anything heavier than its job, then the deletion test to confirm the verdict. **Use CodeGraphContext** (`mcp__cgc__execute_cypher_query`, `mcp__cgc__analyze_code_relationships`) for caller counts and implementation counts when available; otherwise grep and `git log`.
+Walk the codebase organically. Apply the fit test to anything heavier than its job, then the deletion test to confirm the verdict. **Use codebase-memory** (`mcp__codebase-memory__query_graph`, `mcp__codebase-memory__trace_path`, `mcp__codebase-memory__search_graph`) for caller counts and implementation counts when available; otherwise grep and `git log`. It does not link calls made through an object (`self._x.method()`), so a zero caller count is a lead to confirm with grep, never proof.
 
 Seven smells. A smell becomes a finding only with the evidence in the right-hand column.
 
 | Smell | What it looks like | Evidence required |
 |---|---|---|
 | **Speculative generality** | Seam with one Adapter; `Protocol`/ABC with one implementation; registry, strategy, or plugin pattern with one entry; parameters always passed the same value | Implementation count, call sites, `git log` showing no second case ever landed |
-| **Dead or unreachable** | Modules with zero callers; endpoints no client calls; event types never emitted or consumed; columns written but never read; scripts or CLI commands nobody runs; settings that have held one value since introduction | CGC caller count, grep, `git log -S`, `.env.example` and config defaults |
+| **Dead or unreachable** | Modules with zero callers; endpoints no client calls; event types never emitted or consumed; columns written but never read; scripts or CLI commands nobody runs; settings that have held one value since introduction | codebase-memory caller count confirmed by grep, `git log -S`, `.env.example` and config defaults |
 | **Pass-through layering** | Chains where each layer forwards without transforming (handler → service → repository → session); wrappers that only rename a library's methods | Deletion test; lines in the layer vs lines of behaviour it adds |
 | **Defensive over-engineering** | Retry, backoff, or circuit-breaker on in-process or never-failing calls; re-validation of already-validated data at each layer; exception hierarchies with one catch site | The failure it guards against, and whether it has ever occurred (git history, incident notes, logs if visible) |
 | **Premature scale** | Caches, batching, queues, worker pools, sharding, pagination machinery for volumes the Envelope never reaches; multi-tenant plumbing for one business | Envelope numbers against the thresholds the code is built for |
@@ -78,7 +78,7 @@ For each numbered candidate:
   - **Intent** — an ADR, spec, or commit message records a reason; cite it; it may still hold
   - **Invisible** — the deciding evidence is production data the agent cannot see; name the data
 
-  A candidate with no risk flags says so and lists the signals checked: *"No risk flagged: zero callers (CGC), no config reference, last touched 14 months ago, no ADR."*
+  A candidate with no risk flags says so and lists the signals checked: *"No risk flagged: zero callers (codebase-memory + grep), no config reference, last touched 14 months ago, no ADR."*
 - **ADR conflict** — only when the friction is real enough to warrant reopening; mark it (*"contradicts ADR-0004 — but worth reopening because…"*).
 
 After the list, **Looked at and kept**: at most five one-liners for things that pattern-match a smell but pass the fit test, each with the Envelope fact that saves them. This shows the Envelope was applied and pre-empts *"what about X?"*.
